@@ -1,4 +1,4 @@
-// import {getLyric} from 'api/song'
+import {getLyric} from '../../api/lyric'
 // import {ERR_OK} from 'api/config'
 // import {Base64} from 'js-base64'
 
@@ -14,22 +14,24 @@ export default class Song {
     this.url = url
   }
 
-  // getLyric() {
-  //   if (this.lyric) {
-  //     return Promise.resolve(this.lyric)
-  //   }
-  //
-  //   return new Promise((resolve, reject) => {
-  //     getLyric(this.mid).then((res) => {
-  //       if (res.retcode === ERR_OK) {
-  //         this.lyric = Base64.decode(res.lyric)
-  //         resolve(this.lyric)
-  //       } else {
-  //         reject('no lyric')
-  //       }
-  //     })
+  getLyric() {
+    // if (this.lyric) {
+    //   return Promise.resolve(this.lyric)
+    // }
+    //
+    // return new Promise((resolve, reject) => {
+      getLyric(this.mid).then((res) => {
+        console.log(res)
+      // }
+        // if (res.retcode === ERR_OK) {
+        //   this.lyric = Base64.decode(res.lyric)
+        //   resolve(this.lyric)
+        // } else {
+        //   reject('no lyric')
+        // }
+      })
   //   })
-  // }
+  }
 }
 
 export function createSong(musicData) {
@@ -41,7 +43,7 @@ export function createSong(musicData) {
     album: musicData.albumname, // 专辑名字
     duration: musicData.interval, // 播放时长
     image: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${musicData.albummid}.jpg?max_age=2592000`,
-    url: `http://dl.stream.qqmusic.qq.com/C400${musicData.songmid}.m4a?guid=5854437262&vkey=9881CE3394E5F2789A23497BF6B1C5AFD72D8BA3664CEC0EAF0ACF7575DB679182D10B741E95D1DAA548C46BA372EB0E34127E47766FAD11&uin=0&fromtag=38`
+    url: `http://dl.stream.qqmusic.qq.com/C400${musicData.songmid}.m4a?guid=5854437262&vkey=F06E5724447C78283AB6AB3BF3708BF3117B1C85D82396B4C5A9EEFD47ACB81B2EDEC7958F121A969D4278161D8EE0C80680D48A612DFBBF&uin=0&fromtag=38`
   })
 }
 
