@@ -7,8 +7,8 @@
     <div class="bg-image" :style="bgStyle" ref="bgImage">
       <div class="play-wrapper">
         <div ref="playBtn" @click="random" v-show="songs.length>0" class="play">
-        <i class="icon-play"></i>
-        <span class="text">随机播放全部</span>
+          <i class="icon-play"></i>
+          <span class="text">随机播放全部</span>
         </div>
       </div>
       <div class="filter" ref="filter"></div> <!--蒙层-->
@@ -36,15 +36,15 @@
   import Loading from '../../base/loading/loading.vue'
   import SongList from '../../base/song-list/song-list.vue'
   import {prefixStyle} from 'common/js/dom'
-  //  import {playlistMixin} from 'common/js/mixin'
-    import {mapActions} from 'vuex'
+  import {playlistMixin} from 'common/js/mixin'
+  import {mapActions} from 'vuex'
 
   const RESERVED_HEIGHT = 40
   const transform = prefixStyle('transform') // 通过浏览器情况自动选择对应的浏览器兼容头
   const backdrop = prefixStyle('backdrop-filter')
 
   export default {
-//    mixins: [playlistMixin],
+    mixins: [playlistMixin],
     props: {
       bgImage: {
         type: String,
@@ -84,11 +84,11 @@
       this.$refs.list.$el.style.top = `${this.imageHeight}px`
     },
     methods: {
-//      handlePlaylist(playlist) {
-//        const bottom = playlist.length > 0 ? '60px' : ''
-//        this.$refs.list.$el.style.bottom = bottom
-//        this.$refs.list.refresh()
-//      },
+      handlePlaylist(playlist) { // 当页面的播放组件调用后 就要重新设置底部宽度,以及重新刷新scroll
+        const bottom = playlist.length > 0 ? '60px' : ''
+        this.$refs.list.$el.style.bottom = bottom
+        this.$refs.list.refresh()
+      },
       scroll(pos) {
         this.scrollY = pos.y
       },

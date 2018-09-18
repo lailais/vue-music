@@ -1,6 +1,6 @@
 <template>
-  <div class="singer">
-    <ListView :data="map" @select="selectSinger"></ListView>
+  <div class="singer" ref="singer">
+    <ListView :data="map" @select="selectSinger" ref="list"></ListView>
     <router-view></router-view>
   </div>
 </template>
@@ -10,8 +10,10 @@
   import {ERR_OK} from '../../api/config'
   import ListView from '../../base/listview/listview.vue'
   import {mapMutations} from 'vuex'
+  import {playlistMixin} from 'common/js/mixin'
 
   export default {
+    mixins: [playlistMixin],
     data() {
       return {
         singerList: [],
@@ -27,6 +29,11 @@
       this._getSinger()
     },
     methods: {
+      handlePlaylist(playlist) { // 当页面的播放组件调用后 就要重新设置底部宽度,以及重新刷新scroll
+        const bottom = playlist.length > 0 ? '60px' : ''
+        this.$refs.singer.style.bottom = bottom
+        this.$refs.list.refresh()
+      },
       _getSinger() {
         getSinger().then((res) => {
           let num1 = res.indexOf('(')

@@ -1,5 +1,5 @@
 <template>
-  <scroll :data="data" class="listview">
+  <scroll :data="data" class="listview" ref="listview">
     <ul>
       <li v-for="group in data" class="list-group" ref="listGroup" :key="group.title">
         <h2 class="list-group-title">{{group.title}}</h2>
@@ -61,7 +61,7 @@
     methods: {
       selectItem(item) {
         this.$emit('select', item)
-      }
+      },
 //      onShortcutTouchStart(e) {
 //        let anchorIndex = getData(e.target, 'index')
 //        let firstTouch = e.touches[0]
@@ -78,9 +78,9 @@
 //
 //        this._scrollTo(anchorIndex)
 //      },
-//      refresh() {
-//        this.$refs.listview.refresh()
-//      },
+      refresh() {
+        this.$refs.listview.refresh()
+      },
 //      scroll(pos) {
 //        this.scrollY = pos.y
 //      },
